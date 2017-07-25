@@ -1,4 +1,8 @@
 containers:
+  xenial:
+    setup:
+    - !Ubuntu xenial
+    - !Install [apt-transport-https, ca-certificates]
 
   bulk:
     setup:
@@ -18,9 +22,25 @@ commands:
     - bulk
     - pack
     - --dir=ubuntu-xenial
-    - --dest-dir=dest
+    - --dest-dir=dist
 
   bulk: !Command
     description: Run any `bulk` command
     container: bulk
     run: [bulk]
+
+  test-xenial: !Command
+    write-mode: transient-hard-link-copy
+    container: xenial
+    prerequisites: [_package-xenial]
+    run: |
+      set -ex
+      cat mintaka-ubuntu-xenial.list > /etc/apt/sources.list.d/mintaka.list
+      apt-get update
+      dpkg -i dist/mintaka-*.deb || apt-get install -fy
+      lithos_tree --version
+      cantal-agent --version
+      verwalter --version
+      ciruela-server --version
+      swindon --version
+      bash

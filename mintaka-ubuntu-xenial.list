@@ -1,5 +1,5 @@
-deb [trusted=yes] https://repo.mglawica.org/ubuntu/ xenial cantal-stable
-deb [trusted=yes] https://repo.mglawica.org/ubuntu/ xenial verwalter-stable
-deb [trusted=yes] https://repo.mglawica.org/ubuntu/ xenial lithos-stable
-deb [trusted=yes] https://repo.mglawica.org/ubuntu/ xenial ciruela-stable
-deb [trusted=yes] https://repo.mglawica.org/ubuntu/ xenial swindon-stable
+deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial cantal-stable
+deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial verwalter-stable
+deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial lithos-stable
+deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial ciruela-stable
+deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial swindon-stable
