@@ -1,6 +1,5 @@
 [Unit]
 Description=Verwalter configuration service
-After=tinc.service
 
 [Service]
 Type=simple

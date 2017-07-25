@@ -1,6 +1,5 @@
 [Unit]
 Description=Cantal Monitoring Service
-After=tinc.service
 
 [Service]
 Type=simple
