@@ -1,0 +1,13 @@
+minimum-bulk: v0.4.5
+
+metadata:
+  name: mintaka
+  short-description: A single-node do-it-yourself IaaS
+  long-description:
+    A dokku-like tool based on vagga, lithos, cantal, verwater, ciruela,
+    swindon.
+
+versions:
+
+- file: README.rst
+  regex: apt-get install mintaka=([^+ ]+)

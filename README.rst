@@ -22,6 +22,17 @@ following tools:
 .. _swindon: https://swindon-rs.github.io/swindon/
 
 
+Installation
+============
+
+Only ubuntu xenial is currently supported.
+
+Command-line::
+
+    curl https://github.com/mglawica/mintaka/blob/master/mintaka-ubuntu-xenial.list | sudo tee /etc/apt/sources.list.d/mintaka.list
+    apt-get install mintaka=0.1.0+xenial1
+
+
 License
 =======
 

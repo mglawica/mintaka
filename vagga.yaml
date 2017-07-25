@@ -1,0 +1,17 @@
+containers:
+
+  bulk:
+    setup:
+    - !Alpine v3.6
+    - !Install [vim] # edit tag text
+    - &bulk !Tar
+      url: "https://github.com/tailhook/bulk/releases/download/v0.4.9/bulk-v0.4.9.tar.gz"
+      sha256: 23471a9986274bb4b7098c03e2eb7e1204171869b72c45385fcee1c64db2d111
+      path: /
+
+commands:
+
+  bulk: !Command
+    description: Run any `bulk` command
+    container: bulk
+    run: [bulk]
