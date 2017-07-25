@@ -11,6 +11,15 @@ containers:
 
 commands:
 
+  _package-xenial: !Command
+    description: Make package for ubuntu xenial
+    container: bulk
+    run:
+    - bulk
+    - pack
+    - --dir=ubuntu-xenial
+    - --dest-dir=dest
+
   bulk: !Command
     description: Run any `bulk` command
     container: bulk

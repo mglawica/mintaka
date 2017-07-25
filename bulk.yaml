@@ -6,6 +6,12 @@ metadata:
   long-description:
     A dokku-like tool based on vagga, lithos, cantal, verwater, ciruela,
     swindon.
+  depends:
+    lithos
+    cantal
+    verwalter
+    ciruela
+    swindon
 
 versions:
 
