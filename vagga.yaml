@@ -18,6 +18,7 @@ commands:
   _package-xenial: !Command
     description: Make package for ubuntu xenial
     container: bulk
+    work-dir: .
     run:
     - bulk
     - pack

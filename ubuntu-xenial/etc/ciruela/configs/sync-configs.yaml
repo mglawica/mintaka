@@ -1,0 +1,3 @@
+directory: /etc/sync-configs
+num-levels: 1
+append-only: false

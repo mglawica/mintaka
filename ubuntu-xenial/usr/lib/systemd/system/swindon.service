@@ -1,12 +1,11 @@
 [Unit]
-Description=Verwalter configuration service
+Description=Swindon Web Server
 After=mintaka-init.service
 
 [Service]
 Type=simple
 Environment="RUST_LOG=warn"
-User=verwalter
-ExecStart=/usr/bin/verwalter --host 127.0.0.1 --use-sudo
+ExecStart=/usr/bin/swindon --config=/etc/sync-configs/swindon/main.yaml
 Restart=always
 RestartSec=1
 
