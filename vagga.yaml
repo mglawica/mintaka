@@ -1,8 +1,30 @@
+
 containers:
   xenial:
     setup:
     - !Ubuntu xenial
     - !Install [apt-transport-https, ca-certificates]
+
+  kk-js:
+    setup:
+    - !Alpine v3.7
+    - !NpmConfig
+    - !YarnDependencies
+      dir: "kokkupanek/frontend"
+      optional: true
+    environ:
+      NODE_PATH: "/usr/lib/node_modules"
+      HOME: /tmp
+
+  kk-wasm:
+    setup:
+    - !SubConfig
+      path: kokkupanek/vagga.yaml
+      container: wasm
+    environ: &rustenv
+      PATH: /usr/local/bin:/usr/bin:/bin
+      HOME: /work/target
+      RUST_BACKTRACE: 1
 
   bulk:
     setup:
@@ -18,6 +40,7 @@ commands:
   _package-xenial: !Command
     description: Make package for ubuntu xenial
     container: bulk
+    prerequisites: [_make-scheduler, _make-js]
     work-dir: .
     run:
     - bulk
@@ -45,3 +68,23 @@ commands:
       ciruela-server --version
       swindon --version
       bash
+
+  _make-js: !Command
+    description: Compile frontend
+    container: kk-js
+    work-dir: kokkupanek/frontend
+    run: |
+      webpack --progress
+      rm -rf /work/ubuntu-xenial/etc/verwalter/frontend/kk
+      mkdir -p /work/ubuntu-xenial/etc/verwalter/frontend
+      cp -R ../public /work/ubuntu-xenial/etc/verwalter/frontend/kk
+
+  _make-scheduler: !Command
+    description: Compile scheduler
+    container: kk-wasm
+    work-dir: kokkupanek
+    run: |
+      cargo build --target=wasm32-unknown-unknown --release
+      wasm-gc \
+        target/wasm32-unknown-unknown/release/scheduler.wasm \
+        /work/ubuntu-xenial/etc/verwalter/scheduler/v1/scheduler.wasm

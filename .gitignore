@@ -1,3 +1,6 @@
 /.vagga
 /tmp
 /dist
+*.wasm
+/target
+/ubuntu-xenial/etc/verwalter/frontend/kk
