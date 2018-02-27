@@ -6,7 +6,7 @@ Type=oneshot
 ExecStart=/bin/sh -c "id -u verwalter 2>/dev/null 2>&1 || useradd -r verwalter"
 ExecStart=/bin/sh -c "id -u ciruela 2>/dev/null 2>&1 || useradd -r ciruela"
 ExecStart=/bin/sh -c "id -u swindon 2>/dev/null 2>&1 || useradd -r swindon"
-ExecStart=/bin/chown -R ciruela /etc/sync-configs
+ExecStart=/bin/systemd-tmpfiles --create
 
 [Install]
 WantedBy=multi-user.target
