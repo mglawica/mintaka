@@ -88,3 +88,4 @@ commands:
       wasm-gc \
         target/wasm32-unknown-unknown/release/scheduler.wasm \
         /work/ubuntu-xenial/etc/verwalter/scheduler/v1/scheduler.wasm
+      cp -R templates /work/ubuntu-xenial/etc/verwalter

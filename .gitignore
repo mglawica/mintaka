@@ -4,3 +4,4 @@
 *.wasm
 /target
 /ubuntu-xenial/etc/verwalter/frontend/kk
+/ubuntu-xenial/etc/verwalter/templates
