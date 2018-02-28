@@ -3,8 +3,7 @@ Description=Lithos Supervisor service
 
 [Service]
 Type=simple
-Environment="RUST_LOG=warn"
-Environment="RUST_BACKTRACE=1"
+EnvironmentFile=/etc/mintaka.env
 ExecStart=/usr/bin/lithos_tree
 Restart=always
 

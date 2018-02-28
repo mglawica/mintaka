@@ -4,7 +4,7 @@ After=mintaka-init.service
 
 [Service]
 Type=simple
-Environment="RUST_LOG=warn"
+EnvironmentFile=/etc/mintaka.env
 ExecStart=/usr/bin/swindon --config=/etc/sync-configs/swindon/main.yaml
 Restart=always
 RestartSec=1

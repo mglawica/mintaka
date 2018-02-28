@@ -4,9 +4,9 @@ After=mintaka-init.service
 
 [Service]
 Type=simple
-Environment="RUST_LOG=warn"
+EnvironmentFile=/etc/mintaka.env
 User=verwalter
-ExecStart=/usr/bin/verwalter --host 127.0.0.1 --use-sudo
+ExecStart=/usr/bin/verwalter --host ${INTERNAL_IP} --use-sudo
 Restart=always
 RestartSec=1
 

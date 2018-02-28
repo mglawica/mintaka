@@ -4,9 +4,9 @@ After=mintaka-init.service
 
 [Service]
 Type=simple
-Environment="RUST_LOG=warn"
+EnvironmentFile=/etc/mintaka.env
 User=ciruela
-ExecStart=/usr/bin/ciruela-server
+ExecStart=/usr/bin/ciruela-server --host=${INTERNAL_IP}
 Restart=always
 RestartSec=1
 

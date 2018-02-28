@@ -3,8 +3,8 @@ Description=Cantal Monitoring Service
 
 [Service]
 Type=simple
-Environment="RUST_LOG=warn"
-ExecStart=/usr/bin/cantal-agent --host=127.0.0.1 --port 22682 --storage-dir /var/lib/cantal
+EnvironmentFile=/etc/mintaka.env
+ExecStart=/usr/bin/cantal-agent --host=${INTERNAL_IP} --bind-localhost
 Restart=always
 RestartSec=1
 
