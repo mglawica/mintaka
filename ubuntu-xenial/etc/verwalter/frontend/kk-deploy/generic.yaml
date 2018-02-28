@@ -1,0 +1,18 @@
+minimum-wark: 0.1.0
+deployment-dirs: 'config/deploy-(*)'
+lithos-configs: 'lithos.(*).yaml'
+default-copy:
+  /config: /work/config
+config-files-inner: '/config/deploy-*/lithos.*.yaml'
+version: git-describe
+script:
+- tool: ciruela-upload
+  hosts: ['{{ vars.host }}']
+  dir: '/code-{{ vars.project }}/{{ container_name }}/{{ container_version }}'
+- tool: verwalter-kokkupanek
+  hosts: ['{{ vars.host }}']
+  slug: '{{ vars.project }}'
+  deployment-graphql: |
+    mutation NewDeployment($slug: String!, $config: NewDeployment!) {
+      addDeployment(slug: $slug, deploy: $config) { ok }
+    }
