@@ -6,8 +6,8 @@ default-copy:
 config-files-inner: '/config/deploy-*/lithos.*.yaml'
 version: git-describe
 script:
-- tool: ciruela-upload
-  hosts: ['{{ vars.host }}']
+- tool: ciruela
+  clusters: ['{{ vars.host }}']
   dir: '/code-{{ vars.project }}/{{ container_name }}/{{ container_version }}'
 - tool: verwalter-kokkupanek
   hosts: ['{{ vars.host }}']

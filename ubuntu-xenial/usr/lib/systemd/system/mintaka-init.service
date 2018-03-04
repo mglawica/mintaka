@@ -7,7 +7,7 @@ ExecStart=/bin/sh -c "id -u verwalter 2>/dev/null 2>&1 || useradd -r verwalter"
 ExecStart=/bin/sh -c "id -u ciruela 2>/dev/null 2>&1 || useradd -r ciruela"
 ExecStart=/bin/sh -c "id -u swindon 2>/dev/null 2>&1 || useradd -r swindon"
 ExecStart=/bin/systemd-tmpfiles --create
-ExecStart=/bin/sh -c "sed 's/[{][{] vars[.]host [}][}]/'$(hostname)'/' /etc/verwalter/frontend/kk-deploy/generic.yaml /etc/verwalter/frontend/kk-deploy/here.yaml"
+ExecStart=/bin/sh -c "sed 's/[{][{] vars[.]host [}][}]/'$(hostname)'/' /etc/verwalter/frontend/kk/files/generic.yaml /etc/verwalter/frontend/kk/files/here.yaml"
 
 [Install]
 WantedBy=multi-user.target

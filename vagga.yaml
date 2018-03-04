@@ -75,7 +75,7 @@ commands:
     work-dir: kokkupanek/frontend
     run: |
       webpack --progress
-      rm -rf /work/ubuntu-xenial/etc/verwalter/frontend/kk
+      rm -rf /work/ubuntu-xenial/etc/verwalter/frontend/kk/{js,css,fonts}
       mkdir -p /work/ubuntu-xenial/etc/verwalter/frontend
       cp -R ../public /work/ubuntu-xenial/etc/verwalter/frontend/kk
 
