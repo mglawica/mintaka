@@ -3,3 +3,4 @@ deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial verwalter-
 deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial lithos-stable
 deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial ciruela-stable
 deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial swindon-stable
+deb [arch=amd64 trusted=yes] https://repo.mglawica.org/ubuntu/ xenial mintaka-testing
