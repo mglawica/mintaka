@@ -88,6 +88,7 @@ commands:
     work-dir: kokkupanek
     run: |
       cargo build --target=wasm32-unknown-unknown --release
+      mkdir -p /work/ubuntu-xenial/etc/verwalter/scheduler/v1
       wasm-gc \
         target/wasm32-unknown-unknown/release/scheduler.wasm \
         /work/ubuntu-xenial/etc/verwalter/scheduler/v1/scheduler.wasm
