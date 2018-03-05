@@ -29,7 +29,7 @@ containers:
   bulk:
     setup:
     - !Alpine v3.6
-    - !Install [vim] # edit tag text
+    - !Install [vim, git] # edit tag text, git is for describe
     - &bulk !Tar
       url: "https://github.com/tailhook/bulk/releases/download/v0.4.9/bulk-v0.4.9.tar.gz"
       sha256: 23471a9986274bb4b7098c03e2eb7e1204171869b72c45385fcee1c64db2d111
@@ -42,11 +42,14 @@ commands:
     container: bulk
     prerequisites: [_make-scheduler, _make-js]
     work-dir: .
-    run:
-    - bulk
-    - pack
-    - --dir=ubuntu-xenial
-    - --dest-dir=dist
+    run: &package |
+      set -e
+      version=$(git describe --dirty)
+      codename=xenial
+      bulk pack \
+        --dir=ubuntu-xenial \
+        --package-version="${version}+${codename}1" \
+        --dest-dir=dist
 
   bulk: !Command
     description: Run any `bulk` command
