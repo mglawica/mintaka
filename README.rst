@@ -29,8 +29,8 @@ Only ubuntu xenial is currently supported.
 
 Command-line::
 
-    curl https://github.com/mglawica/mintaka/blob/master/mintaka-ubuntu-xenial.list | sudo tee /etc/apt/sources.list.d/mintaka.list
-    apt-get install mintaka=0.1.0+xenial1
+    curl https://raw.githubusercontent.com/mglawica/mintaka/master/mintaka-ubuntu-xenial.list | sudo tee /etc/apt/sources.list.d/mintaka.list
+    apt-get update && apt-get install -y mintaka=0.1.0+xenial1
 
 
 License
