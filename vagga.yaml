@@ -77,6 +77,7 @@ commands:
     container: kk-js
     work-dir: kokkupanek/frontend
     run: |
+      set -ex
       webpack --progress
       rm -rf /work/ubuntu-xenial/etc/verwalter/frontend/kk/{js,css,fonts}
       mkdir -p /work/ubuntu-xenial/etc/verwalter/frontend
@@ -87,6 +88,7 @@ commands:
     container: kk-wasm
     work-dir: kokkupanek
     run: |
+      set -ex
       cargo build --target=wasm32-unknown-unknown --release
       mkdir -p /work/ubuntu-xenial/etc/verwalter/scheduler/v1
       wasm-gc \
