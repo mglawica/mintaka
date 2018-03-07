@@ -6,7 +6,7 @@ After=mintaka-init.service
 Type=simple
 EnvironmentFile=/etc/mintaka.env
 User=verwalter
-ExecStart=/usr/bin/verwalter --host ${INTERNAL_IP} --use-sudo
+ExecStart=/usr/bin/verwalter --host ${INTERNAL_IP} --use-sudo --default-frontend=kk
 Restart=always
 RestartSec=1
 

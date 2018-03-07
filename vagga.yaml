@@ -81,7 +81,7 @@ commands:
       webpack --progress
       rm -rf /work/ubuntu-xenial/etc/verwalter/frontend/kk/{js,css,fonts}
       mkdir -p /work/ubuntu-xenial/etc/verwalter/frontend
-      cp -R ../public /work/ubuntu-xenial/etc/verwalter/frontend/kk
+      cp -R ../public/* /work/ubuntu-xenial/etc/verwalter/frontend/kk
 
   _make-scheduler: !Command
     description: Compile scheduler
