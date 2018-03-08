@@ -11,7 +11,7 @@ metadata:
 versions:
 
 - file: README.rst
-  regex: apt-get install mintaka=([^+ ]+)
+  regex: apt-get install -y mintaka=([^+ ]+)
 
 
 repositories:
