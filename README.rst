@@ -30,7 +30,7 @@ Only ubuntu xenial is currently supported.
 Command-line::
 
     curl https://raw.githubusercontent.com/mglawica/mintaka/master/mintaka-ubuntu-xenial.list | sudo tee /etc/apt/sources.list.d/mintaka.list
-    apt-get update && apt-get install -y mintaka=0.1.0+xenial1
+    apt-get update && apt-get install -y mintaka=0.1.1+xenial1
 
 
 License
