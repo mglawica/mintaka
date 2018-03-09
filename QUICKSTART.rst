@@ -88,9 +88,9 @@ to connect to it from your own machine use ssh tunelling. Log out from
 the current shell and call ssh again like this:
 
     > ssh \
-        -L localhost:8379:127.0.0.1:8379 \
-        -L localhost:22682:127.0.0.1:22682 \
-        -L localhost:24783:127.0.0.1:24783 \
+        -L 8379:127.0.0.1:8379 \
+        -L 22682:127.0.0.1:22682 \
+        -L 24783:127.0.0.1:24783 \
         root@<your host ip>
     root@your-vm:~#
 
@@ -127,8 +127,148 @@ Now copy the public file to the clipboard, for example like this:
 
     > xsel -b < .vagga/key.pub
 
-And create a new "source" at ``http://localhost:8379/~kk/sources/new``,
+And create a new "source" at ``http://localhost:8379/settings/sources/new``,
 let's name it ``hello1``.
 
 .. hint:: If you're deploying from CI put private key into
    ``VAGGAENV_CIRUELA_KEY`` and remove from local disk.
+
+Now you can prepare your repository for the first deploy.
+
+First add a container that is inherited from your base python container and
+contains the actual application code (which we run from current directory
+in a development mode). Here is a piece of ``vagga.yaml``:
+
+.. code-block:: yaml
+
+    containers:
+      py-base:   # ... already there ...
+
+      py:
+        setup:
+        - !SubConfig
+          path: vagga.yaml
+          container: py-base  # original container
+        - !EndureDir /app
+        - !Copy
+          source: /work/hello.py
+          path: /app/hello.py
+
+We also need deployment command:
+
+.. code-block:: yaml
+
+    commands:
+      run:   # ... already there ...
+
+      deploy: !CapsuleCommand
+        description: Run wark deployment tool
+        environ:
+          WARK_LOG: debug,tokio_core=warn
+        run:
+        - vagga
+        - _capsule
+        - script
+        - https://github.com/mglawica/wark/releases/download/v0.3.2/wark
+        - --destination=http://localhost:8379/~kk/files/generic.yaml
+        - -Dproject=hello1    # the name of the source you've just added
+        - -Dhost=localhost
+
+
+Our deployment tool "wark" also adds some stuff to the containers, so we need
+to refer to it's own vagga file. Just add somewhere near the top of
+``vagga.yaml``:
+
+.. code-block:: yaml
+
+    mixins:
+    - vagga/deploy.yaml
+
+
+(first time you run vagga it will warn you that no such mixin exists, that's
+fine we'll create it shortly).
+
+Now if you've done everything right you should see the following:
+
+.. code-block:: console
+
+    > vagga deploy update
+    [ .. other warnings snipped .. ]
+    No deployments available
+
+This means we need to add configs for actual services. Let's put the following
+into a file ``config/deploy-prod/lithos.web.yaml``:
+
+.. code-block:: yaml
+
+    kind: Daemon
+    metadata:
+      container: py       # name of container in vagga.yaml
+    memory-limit: 100Mi
+    workdir: /app
+    executable: /usr/bin/python3
+    arguments:
+    - "hello.py"
+
+.. note:: the convention ``config/deploy-<KIND>/lithos.<NAME>.yaml`` is
+   encoded in the wark configuration file. If you're deploying to other
+   destination convention might be different.
+
+Now if we run command we might get another warning (if you're deploying
+project that already has tags it's still good idea to commit and tag now):
+
+.. code-block:: console
+
+    > vagga deploy update
+    ERROR 2018-03-09T00:10:51Z: wark::version::git: git describe error: cannot describe - no reference found, cannot describe anything.; class=Describe (28)
+     INFO 2018-03-09T00:10:51Z: wark::version::git: HINT: Add a named tag to,current or any previous commit: git tag -a v0.1.0
+
+You should commit everthing done so far and tag it:
+
+.. code-block:: console
+
+    > git add .
+    > git commit -m "Initial deployment configs"
+    > git tag -a v0.1.0 -m "Initial release"
+    [ .. snip .. ]
+     INFO 2018-03-08T23:50:52Z: wark::local: All done, ready for deploy
+
+(you might also want to push branch and tag now)
+
+Okay finally we can push files to the server. You need to pass key file by
+environment variable:
+
+.. code-block:: console
+
+    > VAGGAENV_CIRUELA_KEY=$(cat .vagga/key) vagga deploy -d prod
+    [ .. snipped container building and uploading .. ]
+     INFO 2018-03-09T00:24:26Z: wark::deploy: Version "v0.1.0" is successfully deployed
+
+
+Configuring Services
+====================
+
+You need some GUI work to start the server now. Go to http://localhost:8379/settings/projects :
+
+1. Add new project
+2. Add a group to the project
+3. Add your service to the group, your service config name and version should
+   already be in the UI
+
+That's it. Now you can visit your ``http://<server-ip>:8080/`` to see the
+service.
+
+
+Updating Code
+=============
+
+Just run the:
+
+.. code-block:: console
+
+    > VAGGAENV_CIRUELA_KEY=$(cat .vagga/key) vagga deploy -d prod
+
+This is the same line you need to add to your CI system (and probably
+``VAGGAENV_CIRUELA_KEY`` hidden somewhere in CI variables UI).
+
+
