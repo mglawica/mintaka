@@ -163,13 +163,11 @@ We also need deployment command:
 
       deploy: !CapsuleCommand
         description: Run wark deployment tool
-        environ:
-          WARK_LOG: debug,tokio_core=warn
         run:
         - vagga
         - _capsule
         - script
-        - https://github.com/mglawica/wark/releases/download/v0.3.2/wark
+        - https://github.com/mglawica/wark/releases/download/v0.3.3/wark
         - --destination=http://localhost:8379/~kk/files/generic.yaml
         - -Dproject=hello1    # the name of the source you've just added
         - -Dhost=localhost
@@ -194,7 +192,7 @@ Now if you've done everything right you should see the following:
 
     > vagga deploy update
     [ .. other warnings snipped .. ]
-    No deployments available
+    ERROR: No deployments available
 
 This means we need to add configs for actual services. Let's put the following
 into a file ``config/deploy-prod/lithos.web.yaml``:
@@ -214,24 +212,21 @@ into a file ``config/deploy-prod/lithos.web.yaml``:
    encoded in the wark configuration file. If you're deploying to other
    destination convention might be different.
 
-Now if we run command we might get another warning (if you're deploying
-project that already has tags it's still good idea to commit and tag now):
+Now we can generate configs:
 
 .. code-block:: console
 
     > vagga deploy update
-    ERROR 2018-03-09T00:10:51Z: wark::version::git: git describe error: cannot describe - no reference found, cannot describe anything.; class=Describe (28)
-     INFO 2018-03-09T00:10:51Z: wark::version::git: HINT: Add a named tag to,current or any previous commit: git tag -a v0.1.0
+    [ .. snip .. ]
+     INFO 2018-03-12T23:39:06Z: wark::local: All done, ready for deploy
 
-You should commit everthing done so far and tag it:
+It's a good idea to commit everthing done so far and tag it:
 
 .. code-block:: console
 
     > git add .
     > git commit -m "Initial deployment configs"
     > git tag -a v0.1.0 -m "Initial release"
-    [ .. snip .. ]
-     INFO 2018-03-08T23:50:52Z: wark::local: All done, ready for deploy
 
 (you might also want to push branch and tag now)
 
