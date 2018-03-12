@@ -80,12 +80,16 @@ In root SSH shell add mintaka's package list and install mintaka package:
 
 First time after installation you should start the services:
 
+.. code-block:: console
+
     > systemctl daemon-reload
     > systemctl start multi-user.target
 
 All of the infrastructure services listen on local by default, so
 to connect to it from your own machine use ssh tunelling. Log out from
 the current shell and call ssh again like this:
+
+.. code-block:: console
 
     > ssh \
         -L 8379:127.0.0.1:8379 \
