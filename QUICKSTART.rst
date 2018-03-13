@@ -171,7 +171,7 @@ We also need deployment command:
         - vagga
         - _capsule
         - script
-        - https://github.com/mglawica/wark/releases/download/v0.3.3/wark
+        - https://github.com/mglawica/wark/releases/download/v0.3.4/wark
         - --destination=http://localhost:8379/~kk/files/generic.yaml
         - -Dproject=hello1    # the name of the source you've just added
         - -Dhost=localhost
