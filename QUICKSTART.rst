@@ -153,7 +153,7 @@ in a development mode). Here is a piece of ``vagga.yaml``:
         - !SubConfig
           path: vagga.yaml
           container: py-base  # original container
-        - !EndureDir /app
+        - !EnsureDir /app
         - !Copy
           source: /work/hello.py
           path: /app/hello.py
