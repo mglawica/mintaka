@@ -4,7 +4,7 @@ Mintaka
 
 :Status: Proof of Concept
 
-The basic idea here is to start with Dokku_-like experience using the
+The basic idea here is to start with Dokku_like experience using the
 following tools:
 
 * vagga_
@@ -14,12 +14,13 @@ following tools:
 * ciruela_
 * swindon_
 
+.. _Dokku: http://dokku.viewdocs.io/dokku
 .. _lithos: https://lithos.readthedocs.io
 .. _vagga: https://vagga.readthedocs.io
 .. _cantal: https://cantal.readthedocs.io
 .. _verwalter: https://verwalter.readthedocs.io
-.. _ciruela: https://tailhook.github.io/ciruela/
-.. _swindon: https://swindon-rs.github.io/swindon/
+.. _ciruela: https://tailhook.github.io/ciruela
+.. _swindon: https://swindon-rs.github.io/swindon
 
 
 Installation
