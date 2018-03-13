@@ -4,7 +4,7 @@ Mintaka
 
 :Status: Proof of Concept
 
-The basic idea here is to start with Dokku_like experience using the
+The basic idea here is to start with Dokku_-like experience using the
 following tools:
 
 * vagga_
